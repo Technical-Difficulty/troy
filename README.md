@@ -4,14 +4,27 @@ The EVM foot soldier
 
 ## Usage
 
-```
-$ troy -a <CONTRACT_ADDRESS> -k <INFURA_ID> -n <NETWORK>
-$ troy -a 0x6b175474e89094c44da98b954eedeac495271d0f -k <INFURA_ID> -n mainnet
+#### Scan an existing contract on a given network:
 
 ```
+$ troy -a <CONTRACT_ADDRESS> -k <INFURA_ID> -n <NETWORK>
+```
+
+Example:
+
+```
+$ troy -a 0x6b175474e89094c44da98b954eedeac495271d0f -k <INFURA_ID> -n mainnet
+```
+
+#### Scan bytecode
 
 ```
 $ troy -c <BYTE_CODE>
+```
+
+Example:
+
+```
 $ troy -c 60ff60ff
 ```
 
