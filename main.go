@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"troy/src"
+)
 
 func main() {
-	fmt.Println("The EVM foot soldier")
+	src.Start()
 }
