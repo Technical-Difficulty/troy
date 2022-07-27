@@ -56,8 +56,8 @@ func main() {
   
 	logconfig := &logger.Config{
 		EnableMemory:     true, 
-		DisableStack:     true, 
-		DisableStorage:   true, 
+		DisableStack:     false, 
+		DisableStorage:   false, 
 		EnableReturnData: true, 
 		Debug:            true,
 	}
@@ -85,8 +85,8 @@ func main() {
 		Origin:      sender,
 		State:       statedb,
 		GasLimit:    genesisConfig.GasLimit,
-		GasPrice:    big.NewInt(0), 
-		Value:       big.NewInt(0),
+		GasPrice:    new(big.Int), 
+		Value:       new(big.Int),
 		Difficulty:  genesisConfig.Difficulty,
 		Time:        new(big.Int).SetUint64(genesisConfig.Timestamp),
 		Coinbase:    genesisConfig.Coinbase,
