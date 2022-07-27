@@ -1,9 +1,8 @@
 package src
 
 import (
-	"encoding/hex"
 	"fmt"
-	"strings"
+	log "github.com/sirupsen/logrus"
 	"troy/src/dasm"
 	"troy/src/eth"
 )
@@ -12,16 +11,10 @@ func Start() {
 	config := InitConfig()
 	contract := eth.NewContract(config.Address, config.RPCUrl, config.Network)
 	code := contract.GetByteCode()
-	code = strings.Replace(code, "0x", "", -1)
 
-	fmt.Printf("%v\n", code)
+	log.WithField("Byte Code", code).Info("Retrieved byte code successfully")
 
-	script, err := hex.DecodeString(code)
-	if err != nil {
-		fmt.Println("Error decoding")
-	}
-
-	it := dasm.NewInstructionIterator(script)
+	it := dasm.NewInstructionIterator(code)
 	for it.Next() {
 		if it.Arg() != nil && 0 < len(it.Arg()) {
 			fmt.Printf("%05x: %v %#x\n", it.PC(), it.Op(), it.Arg())

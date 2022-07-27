@@ -1,5 +1,11 @@
 package eth
 
+import (
+	"encoding/hex"
+	log "github.com/sirupsen/logrus"
+	"strings"
+)
+
 type Contract struct {
 	Address string
 	rpc     RPC
@@ -12,6 +18,16 @@ func NewContract(address string, url string, network string) Contract {
 	}
 }
 
-func (c *Contract) GetByteCode() string {
-	return c.rpc.GetCode(c.Address)
+func (c *Contract) GetByteCode() []byte {
+	code := c.rpc.GetCode(c.Address)
+	code = strings.Replace(code, "0x", "", 1)
+
+	bytes, err := hex.DecodeString(code)
+	if err != nil {
+		log.WithField("Error", err).
+			WithField("Address", c.Address).
+			Fatal("Failed to decode retrieved contract byte code")
+	}
+
+	return bytes
 }
