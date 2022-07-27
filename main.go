@@ -55,7 +55,7 @@ func main() {
 	fmt.Println("The EVM foot soldier")
   
 	logconfig := &logger.Config{
-		EnableMemory:     true, 
+		EnableMemory:     false, 
 		DisableStack:     false, 
 		DisableStorage:   false, 
 		EnableReturnData: true, 
@@ -79,7 +79,7 @@ func main() {
 
 	statedb.CreateAccount(sender)
 
-  code := common.FromHex("60ff60ff")
+  code := common.FromHex("608060405234801561001057600080fd5b5060fb8061001f6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c806342e2d4d914602d575b600080fd5b605860048036036040811015604157600080fd5b506001600160a01b0381358116916020013516605a565b005b6040805163095ea7b360e01b81526001600160a01b0383811660048301526003602483015291519184169163095ea7b39160448082019260009290919082900301818387803b15801560ab57600080fd5b505af115801560be573d6000803e3d6000fd5b50505050505056fea265627a7a7231582074d2a91f880b7effa21aa471ea48b6bcf75305a0c1e9d86c0e0fda548a127b2464736f6c63430005110032")
 
 	runtimeConfig := runtime.Config{
 		Origin:      sender,
@@ -99,7 +99,7 @@ func main() {
 
   runtimeConfig.ChainConfig = params.AllEthashProtocolChanges
 
-	input := common.FromHex(string(""))
+	input := common.FromHex("42e2d4d900000000000000000000000023bbc53e1904b589d685e811c5d3410146f0ab0200000000000000000000000023bbc53e1904b589d685e811c5d3410146f0ab02")
   statedb.SetCode(receiver, code)
 
 	var execFunc func() ([]byte, uint64, error)
@@ -108,10 +108,6 @@ func main() {
   }
 
 	output, _, _, _ := timedExec(false, execFunc)
-
-  // f, err := os.Create(memProfilePath)
-  // pprof.WriteHeapProfile(f)
-  // f.Close()
 
   fmt.Fprintln(os.Stderr, "#### TRACE ####")
   logger.WriteTrace(os.Stderr, debugLogger.StructLogs())
