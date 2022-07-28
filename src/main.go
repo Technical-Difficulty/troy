@@ -2,12 +2,10 @@ package src
 
 import (
 	"encoding/hex"
-	"fmt"
-	"troy/src/dasm"
-	"troy/src/enum"
-	"troy/src/eth"
-
 	log "github.com/sirupsen/logrus"
+	"troy/src/dasm"
+	"troy/src/eth"
+	"troy/src/ui"
 )
 
 func Start() {
@@ -31,17 +29,6 @@ func Start() {
 		code = script
 	}
 
-	log.WithField("Byte Code", code).Info("Retrieved byte code successfully")
-
-	it := dasm.NewInstructionIterator(code)
-	for it.Next() {
-		enum.EvaluateInstr(it.PC(), it.Op(), it.Arg())
-
-		if it.Arg() != nil && 0 < len(it.Arg()) {
-			fmt.Printf("%05x: %v %#x\n", it.PC(), it.Op(), it.Arg())
-		} else {
-			fmt.Printf("%05x: %v\n", it.PC(), it.Op())
-		}
-	}
-
+	instructions := dasm.GetInstructions(code)
+	ui.Start(instructions)
 }

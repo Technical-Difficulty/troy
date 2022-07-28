@@ -22,6 +22,19 @@ func NewInstructionIterator(code []byte) *instructionIterator {
 	return it
 }
 
+func GetInstructions(code []byte) (ins []Instruction) {
+	iter := NewInstructionIterator(code)
+	for iter.Next() {
+		ins = append(ins, Instruction{
+			PC:      iter.PC(),
+			OpCode:  iter.Op(),
+			Operand: iter.Arg(),
+		})
+	}
+
+	return ins
+}
+
 // Next returns true if there is a next instruction and moves on.
 func (it *instructionIterator) Next() bool {
 	if it.error != nil || uint64(len(it.code)) <= it.pc {
