@@ -12,23 +12,32 @@ type InstructionTable struct {
 }
 
 func NewInstructionTable(instructions []dasm.Instruction) InstructionTable {
-	table := tview.NewTable()
-	table.SetSelectable(true, false)
-
-	for i, ins := range instructions {
-		var output string
-
-		if ins.Operand != nil {
-			output = fmt.Sprintf("[%05x] %v %#x\n", ins.PC, ins.OpCode, ins.Operand)
-		} else {
-			output = fmt.Sprintf("[%05x] %v\n", ins.PC, ins.OpCode)
-		}
-
-		table.SetCell(i, 0, tview.NewTableCell(output).SetExpansion(1).SetAlign(tview.AlignLeft))
-	}
-
-	return InstructionTable{
-		View:         table,
+	table := InstructionTable{
+		View:         tview.NewTable(),
 		Instructions: instructions,
 	}
+
+	table.init()
+
+	for i, ins := range instructions {
+		table.addColumn(i, ins)
+	}
+
+	return table
+}
+
+func (t *InstructionTable) init() {
+	t.View.SetSelectable(true, false)
+}
+
+func (t *InstructionTable) addColumn(row int, ins dasm.Instruction) {
+	var output string
+
+	if ins.Operand != nil {
+		output = fmt.Sprintf("[%05x] %v %#x\n", ins.PC, ins.OpCode, ins.Operand)
+	} else {
+		output = fmt.Sprintf("[%05x] %v\n", ins.PC, ins.OpCode)
+	}
+
+	t.View.SetCell(row, 0, tview.NewTableCell(output).SetExpansion(1).SetAlign(tview.AlignLeft))
 }
