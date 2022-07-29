@@ -3,6 +3,7 @@ package ui
 import (
 	"github.com/rivo/tview"
 	"troy/src/dasm"
+	"troy/src/ui/table"
 )
 
 type UI struct {
@@ -11,10 +12,10 @@ type UI struct {
 
 func Start(instructions []dasm.Instruction) {
 	app := tview.NewApplication()
-	table := NewInstructionTable(instructions)
+	tbl := table.NewInstructionTable(instructions)
 
 	flex := createFlex()
-	flex.AddItem(table.View, 0, 1, true)
+	flex.AddItem(tbl.View, 0, 1, true)
 
 	if err := app.SetRoot(flex, true).EnableMouse(true).Run(); err != nil {
 		panic(err)
