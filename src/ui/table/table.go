@@ -33,11 +33,13 @@ func NewInstructionTable(instructions []dasm.Instruction, config src.Config) Ins
 }
 
 func (t *InstructionTable) init() {
-	t.View.SetSelectable(true, false)
+	colors := t.config.Colors.Table
 
-	if bg, ok := tcell.ColorNames[t.config.Colors.Table.Default.Background]; ok {
-		t.View.SetBackgroundColor(bg)
-	}
+	t.View.SetSelectable(true, false)
+	t.View.SetBackgroundColor(t.getColor(colors.Default.Background))
+	t.View.SetSelectedStyle(tcell.StyleDefault.
+		Foreground(t.getColor(colors.Selected.Foreground)).
+		Background(t.getColor(colors.Selected.Background)))
 }
 
 func (t *InstructionTable) addColumn(cell *tview.TableCell, selectable bool) {

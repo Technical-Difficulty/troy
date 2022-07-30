@@ -2,6 +2,7 @@ package table
 
 import (
 	"fmt"
+	"github.com/gdamore/tcell/v2"
 	log "github.com/sirupsen/logrus"
 	"strings"
 	"troy/src/dasm"
@@ -60,4 +61,13 @@ func (t *InstructionTable) getOpcodeTag(ins dasm.Instruction) string {
 func (t *InstructionTable) getDefaultColorTag() string {
 	c := t.config.Colors.Table.Default
 	return fmt.Sprintf("[%s:%s:%s]", c.Foreground, c.Background, c.Flags)
+}
+
+func (t *InstructionTable) getColor(key string) (c tcell.Color) {
+	if value, ok := tcell.ColorNames[key]; ok {
+		return value
+	}
+
+	log.WithField("Key", key).Fatal("Failed to find specified color")
+	return
 }

@@ -5,6 +5,10 @@
       "background": "black",
       "flags": "-"
     },
+    "selected": {
+      "foreground": "white",
+      "background": "darkcyan"
+    },
     "program_counter": "[grey::b]"
   }
 }
