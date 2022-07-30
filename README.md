@@ -1,6 +1,6 @@
-# Troy
+# Troy - The EVM Footer Soldier
 
-The EVM foot soldier
+An Ethereum Virtual Machine (EVM) security analysis tool.
 
 ## Usage
 
