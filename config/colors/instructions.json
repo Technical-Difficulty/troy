@@ -1,17 +1,309 @@
 {
   "instructions": {
-
     "default": {
       "opcode": {
-        "prefix": "[white:black:-]",
+        "prefix": "[darkseagreen:black:-]",
         "suffix": "[white:black:-]"
       }
     },
-
+    "ADD": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "ADDMOD": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "ADDRESS": {
+      "opcode": {
+        "prefix": "[green::]",
+        "suffix": "[white::]"
+      }
+    },
+    "AND": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "BYTE": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "CALL": {
+      "opcode": {
+        "prefix": "[green:darkgreen:b]",
+        "suffix": "[white:black:-]"
+      }
+    },
+    "CALLDATACOPY": {
+      "opcode": {
+        "prefix": "[green::]",
+        "suffix": "[white::]"
+      }
+    },
+    "CALLDATALOAD": {
+      "opcode": {
+        "prefix": "[green::]",
+        "suffix": "[white::]"
+      }
+    },
+    "CALLDATASIZE": {
+      "opcode": {
+        "prefix": "[green::]",
+        "suffix": "[white::]"
+      }
+    },
+    "CALLER": {
+      "opcode": {
+        "prefix": "[green::]",
+        "suffix": "[white::]"
+      }
+    },
+    "CALLVALUE": {
+      "opcode": {
+        "prefix": "[green::]",
+        "suffix": "[white::]"
+      }
+    },
+    "CREATE": {
+      "opcode": {
+        "prefix": "[green:darkgreen:b]",
+        "suffix": "[white:black:-]"
+      }
+    },
+    "CREATE2": {
+      "opcode": {
+        "prefix": "[green:darkgreen:b]",
+        "suffix": "[white:black:-]"
+      }
+    },
+    "DELEGATECALL": {
+      "opcode": {
+        "prefix": "[green:darkgreen:b]",
+        "suffix": "[white:black:-]"
+      }
+    },
+    "DIV": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "EQ": {
+      "opcode": {
+        "prefix": "[mediumvioletred::b]",
+        "suffix": "[white::]"
+      }
+    },
+    "EXP": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "ISZERO": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "GAS": {
+      "opcode": {
+        "prefix": "[green::]",
+        "suffix": "[white::]"
+      }
+    },
+    "GT": {
+      "opcode": {
+        "prefix": "[mediumvioletred::b]",
+        "suffix": "[white::]"
+      }
+    },
+    "INVALID": {
+      "opcode": {
+        "prefix": "[darkred:black:]",
+        "suffix": "[white::-]"
+      }
+    },
+    "JUMP": {
+      "opcode": {
+        "prefix": "[yellow::]",
+        "suffix": "[white::-]"
+      }
+    },
+    "JUMPDEST": {
+      "opcode": {
+        "prefix": "[yellow::b]",
+        "suffix": "[white::-]"
+      }
+    },
     "JUMPI": {
       "opcode": {
         "prefix": "[yellow:black:b]",
         "suffix": "[white::-]"
+      }
+    },
+    "LT": {
+      "opcode": {
+        "prefix": "[mediumvioletred::b]",
+        "suffix": "[white::]"
+      }
+    },
+    "MLOAD": {
+      "opcode": {
+        "prefix": "[plum::b]",
+        "suffix": "[white::-]"
+      }
+    },
+    "MOD": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "MSTORE": {
+      "opcode": {
+        "prefix": "[plum::b]",
+        "suffix": "[white::-]"
+      }
+    },
+    "MSTORE8": {
+      "opcode": {
+        "prefix": "[plum::b]",
+        "suffix": "[white::-]"
+      }
+    },
+    "MUL": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "MULMOD": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "NOT": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "OR": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "ORIGIN": {
+      "opcode": {
+        "prefix": "[green::]",
+        "suffix": "[white::]"
+      }
+    },
+    "RETURN": {
+      "opcode": {
+        "prefix": "[darkred:black:]",
+        "suffix": "[white::]"
+      }
+    },
+    "REVERT": {
+      "opcode": {
+        "prefix": "[darkred:black:]",
+        "suffix": "[white::-]"
+      }
+    },
+    "SAR": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "SDIV": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "SIGNEXTEND": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "SELFDESTRUCT": {
+      "opcode": {
+        "prefix": "[white:darkred:b]",
+        "suffix": "[white:black:-]"
+      }
+    },
+    "SGT": {
+      "opcode": {
+        "prefix": "[mediumvioletred::b]",
+        "suffix": "[white::]"
+      }
+    },
+    "SHL": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "SHR": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "SLOAD": {
+      "opcode": {
+        "prefix": "[plum::b]",
+        "suffix": "[white::-]"
+      }
+    },
+    "SLT": {
+      "opcode": {
+        "prefix": "[mediumvioletred::b]",
+        "suffix": "[white::]"
+      }
+    },
+    "SMOD": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "SSTORE": {
+      "opcode": {
+        "prefix": "[plum::b]",
+        "suffix": "[white::-]"
+      }
+    },
+    "STOP": {
+      "opcode": {
+        "prefix": "[red:black:]",
+        "suffix": "[white::-]"
+      }
+    },
+    "SUB": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
+      }
+    },
+    "XOR": {
+      "opcode": {
+        "prefix": "[palegreen::]",
+        "suffix": "[white::]"
       }
     }
   }
