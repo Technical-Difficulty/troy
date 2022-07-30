@@ -33,9 +33,13 @@ func Start() {
 	instructions := dasm.GetInstructions(code)
 
 	// Returns function signature as enum.FuncSig
-	// fs.String() 0xfdf80bda
+	// fs.String() "0xfdf80bda"
 	// fs.Lookup() "transfer(address,uint256)"
-	// enum.FuncSigs(instructions)
+	// funcSigs := enum.FuncSigs(instructions)
+
+	// Returns external calls as enum.ExtCall
+	// ec.FuncSig.String() "0xfdf80bda"
+	// ec.FuncSig.Lookup() "transfer(address,uint256)"
 
 	ui.Start(instructions)
 }

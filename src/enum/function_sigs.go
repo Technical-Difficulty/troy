@@ -10,7 +10,7 @@ import (
 )
 
 type FuncSig struct {
-	Operand []byte
+	ins dasm.Instruction
 }
 
 type FourByte struct {
@@ -21,7 +21,7 @@ type FourByte struct {
 }
 
 func (f *FuncSig) String() string {
-	return "0x" + hex.EncodeToString(f.Operand)
+	return "0x" + hex.EncodeToString(f.ins.Operand)
 }
 
 func (f *FuncSig) Lookup() (FourByte, error) {
@@ -60,6 +60,7 @@ func (f *FuncSig) Lookup() (FourByte, error) {
 // PUSH4 <FUNC_SIG>
 // ...
 // JUMPDEST
+// TODO: parse function arguments to get full signature
 func FuncSigs(instructions []dasm.Instruction) (out []FuncSig) {
 	var scan bool
 
@@ -70,7 +71,7 @@ func FuncSigs(instructions []dasm.Instruction) (out []FuncSig) {
 
 		if scan && ins.OpCode.String() == "PUSH4" {
 			out = append(out, FuncSig{
-				Operand: ins.Operand,
+				ins: ins,
 			})
 		}
 
