@@ -22,7 +22,7 @@
       "opcode": "[palegreen::]"
     },
     "CALL": {
-      "opcode": "[green:darkgreen:b]"
+      "opcode": "[white:darkred:b]"
     },
     "CALLDATACOPY": {
       "opcode": "[green::]"
@@ -40,13 +40,13 @@
       "opcode": "[green::]"
     },
     "CREATE": {
-      "opcode": "[green:darkgreen:b]"
+      "opcode": "[white:darkred:b]"
     },
     "CREATE2": {
-      "opcode": "[green:darkgreen:b]"
+      "opcode": "[white:darkred:b]"
     },
     "DELEGATECALL": {
-      "opcode": "[green:darkgreen:b]"
+      "opcode": "[white:darkred:b]"
     },
     "DIV": {
       "opcode": "[palegreen::]"
