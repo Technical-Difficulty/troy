@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"troy/src"
+	"troy/src/dasm/enum"
 	"troy/src/eth"
 	"troy/src/ui"
 )
@@ -12,5 +13,8 @@ func main() {
 	config := src.InitConfig(args)
 	contract := eth.InitInitialContract(args, config)
 
-	ui.Start(contract, config)
+	enumerator := enum.NewContractEnum(contract)
+	enumerator.Enumerate()
+
+	ui.Start(enumerator, config)
 }

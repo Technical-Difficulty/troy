@@ -2,10 +2,11 @@ package enum
 
 import (
 	"troy/src/dasm"
+	"troy/src/dasm/enum/functions"
 )
 
 type ExtCall struct {
-	FuncSig FuncSig
+	FuncSig functions.Signature
 	ins     dasm.Instruction
 }
 
@@ -23,7 +24,7 @@ func ExtCalls(instructions []dasm.Instruction) (out []ExtCall) {
 
 		if ins.OpCode.String() == "CALL" && lastPush4Ins.PC != 0 {
 			out = append(out, ExtCall{
-				FuncSig: FuncSig{ins: lastPush4Ins},
+				FuncSig: functions.NewSignature(ins),
 				ins:     ins,
 			})
 			lastPush4Ins = dasm.Instruction{}

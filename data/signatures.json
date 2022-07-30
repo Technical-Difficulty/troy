@@ -1,0 +1,14 @@
+{
+  "0x124c32a1": [
+    "enter(bytes32,bytes8)"
+  ],
+  "0x60643652": [
+    "maxEntrants()"
+  ],
+  "0x694463a2": [
+    "totalEntrants()"
+  ],
+  "0x90ae631d": [
+    "assignAll()"
+  ]
+}

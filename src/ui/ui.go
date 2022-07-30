@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/rivo/tview"
 	"troy/src"
+	"troy/src/dasm/enum"
 	"troy/src/eth"
 	"troy/src/ui/table"
 )
@@ -13,11 +14,11 @@ type UI struct {
 	Config      src.Config
 }
 
-func Start(contract eth.Contract, config src.Config) UI {
+func Start(enum enum.ContractEnum, config src.Config) UI {
 	app := tview.NewApplication()
-	tbl := table.NewInstructionTable(contract.Instructions.Array(), config)
+	tbl := table.NewInstructionTable(enum.Contract.Instructions.Array(), config)
 
-	flex := createFlex(contract)
+	flex := createFlex(enum.Contract)
 	flex.AddItem(tbl.View, 0, 1, true)
 
 	if err := app.SetRoot(flex, true).EnableMouse(true).Run(); err != nil {
