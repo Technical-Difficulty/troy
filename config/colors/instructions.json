@@ -6,6 +6,12 @@
         "suffix": "[white:black:-]"
       }
     },
+    "notdefined": {
+      "opcode": {
+        "prefix": "[gray::]",
+        "suffix": "[white::]"
+      }
+    },
     "ADD": {
       "opcode": {
         "prefix": "[palegreen::]",

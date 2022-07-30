@@ -3,6 +3,7 @@ package table
 import (
 	"fmt"
 	"log"
+	"strings"
 	"troy/src/dasm"
 )
 
@@ -24,6 +25,12 @@ func (t *InstructionTable) getColorValues(ins dasm.Instruction) (prefix string, 
 	def, ok := t.config.Colors.Instructions["default"]
 	if !ok {
 		log.Fatal("Failed to find default instruction colors in color config")
+	}
+
+	if strings.Contains(ins.OpCode.String(), "not defined") {
+		if tags, ok := t.config.Colors.Instructions["notdefined"]; ok {
+			return tags.Opcode.Prefix, tags.Opcode.Suffix
+		}
 	}
 
 	if tags, ok := t.config.Colors.Instructions[ins.OpCode.String()]; ok {
