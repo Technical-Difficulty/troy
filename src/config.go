@@ -24,7 +24,8 @@ type (
 	}
 
 	TableColors struct {
-		Default ColorFlag
+		Default        ColorFlag
+		ProgramCounter string `json:"program_counter"`
 	}
 
 	ColorFlag struct {

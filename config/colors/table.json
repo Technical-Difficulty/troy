@@ -4,6 +4,7 @@
       "foreground": "white",
       "background": "black",
       "flags": "-"
-    }
+    },
+    "program_counter": "[grey::b]"
   }
 }

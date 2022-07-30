@@ -12,12 +12,22 @@ func (t *InstructionTable) getInstructionOutput(ins dasm.Instruction) (output st
 	tag := t.getOpcodeTag(ins)
 
 	if ins.Operand != nil {
-		output = fmt.Sprintf("  [%05x] %s%v%s %#x\n", ins.PC, tag, ins.OpCode, base, ins.Operand)
+		output = fmt.Sprintf("  %s %s%v%s %#x\n",
+			t.getProgramCounterOutput(ins.PC), tag, ins.OpCode, base, ins.Operand,
+		)
 	} else {
-		output = fmt.Sprintf("  [%05x] %s%v%s\n", ins.PC, tag, ins.OpCode, base)
+		output = fmt.Sprintf("  %s %s%v%s\n",
+			t.getProgramCounterOutput(ins.PC), tag, ins.OpCode, base,
+		)
 	}
 
 	return t.colorize(output)
+}
+
+func (t *InstructionTable) getProgramCounterOutput(pc uint64) string {
+	return fmt.Sprintf("%s[%05x]%s",
+		t.config.Colors.Table.ProgramCounter, pc, t.getDefaultColorTag(),
+	)
 }
 
 func (t *InstructionTable) colorize(input string) string {
