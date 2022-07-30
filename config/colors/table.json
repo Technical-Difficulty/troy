@@ -1,0 +1,9 @@
+{
+  "table": {
+    "default": {
+      "foreground": "white",
+      "background": "black",
+      "flags": "-"
+    }
+  }
+}

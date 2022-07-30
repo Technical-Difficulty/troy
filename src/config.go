@@ -16,10 +16,21 @@ type (
 
 	ColorsConfig struct {
 		Instructions map[string]InstructionColors
+		Table        TableColors
 	}
 
 	InstructionColors struct {
 		Opcode ColorTags
+	}
+
+	TableColors struct {
+		Default ColorFlag
+	}
+
+	ColorFlag struct {
+		Foreground string
+		Background string
+		Flags      string
 	}
 
 	ColorTags struct {
@@ -42,14 +53,24 @@ func InitConfig(args ParsedArgs) (config Config) {
 }
 
 func initColors() (colors ColorsConfig) {
-	dat, err := os.ReadFile("config/colors/instructions.json")
+	instructions, err := os.ReadFile("config/colors/instructions.json")
 	if err != nil {
-		log.WithField("Error", err).Fatal("Failed to initialise color config")
+		log.WithField("Error", err).Fatal("Failed to initialise instructions color config")
 	}
 
-	err = json.Unmarshal(dat, &colors)
+	err = json.Unmarshal(instructions, &colors)
 	if err != nil {
-		log.WithField("Error", err).Fatal("Failed to initialise color config")
+		log.WithField("Error", err).Fatal("Failed to unmarshal instructions color config")
+	}
+
+	table, err := os.ReadFile("config/colors/table.json")
+	if err != nil {
+		log.WithField("Error", err).Fatal("Failed to initialise table color config")
+	}
+
+	err = json.Unmarshal(table, &colors)
+	if err != nil {
+		log.WithField("Error", err).Fatal("Failed to unmarshal table color config")
 	}
 
 	return colors

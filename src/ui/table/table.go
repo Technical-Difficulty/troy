@@ -1,6 +1,7 @@
 package table
 
 import (
+	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 	"troy/src"
 	"troy/src/dasm"
@@ -33,6 +34,10 @@ func NewInstructionTable(instructions []dasm.Instruction, config src.Config) Ins
 
 func (t *InstructionTable) init() {
 	t.View.SetSelectable(true, false)
+
+	if bg, ok := tcell.ColorNames[t.config.Colors.Table.Default.Background]; ok {
+		t.View.SetBackgroundColor(bg)
+	}
 }
 
 func (t *InstructionTable) addColumn(cell *tview.TableCell, selectable bool) {
