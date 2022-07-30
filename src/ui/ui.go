@@ -15,7 +15,7 @@ type UI struct {
 
 func Start(contract eth.Contract, config src.Config) UI {
 	app := tview.NewApplication()
-	tbl := table.NewInstructionTable(contract.Instructions, config)
+	tbl := table.NewInstructionTable(contract.Instructions.Array(), config)
 
 	flex := createFlex(contract)
 	flex.AddItem(tbl.View, 0, 1, true)

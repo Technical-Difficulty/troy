@@ -11,7 +11,7 @@ import (
 type Contract struct {
 	Address      string
 	ByteCode     []byte
-	Instructions []dasm.Instruction
+	Instructions dasm.InstructionSet
 	IsMock       bool // mock contracts are when bytecode is passed as an arg
 	rpc          RPC
 }
@@ -32,7 +32,7 @@ func NewContract(address string, url string, network string) (contract Contract)
 
 	bytes := contract.GetByteCode()
 	contract.ByteCode = bytes
-	contract.Instructions = dasm.GetInstructions(bytes)
+	contract.Instructions = dasm.GetInstructionSet(bytes)
 
 	return
 }
@@ -46,7 +46,7 @@ func NewMockContract(code string) (contract Contract) {
 
 	return Contract{
 		ByteCode:     bytes,
-		Instructions: dasm.GetInstructions(bytes),
+		Instructions: dasm.GetInstructionSet(bytes),
 		IsMock:       true,
 	}
 }

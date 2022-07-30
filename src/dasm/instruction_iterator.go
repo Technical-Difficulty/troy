@@ -35,6 +35,11 @@ func GetInstructions(code []byte) (ins []Instruction) {
 	return ins
 }
 
+func GetInstructionSet(code []byte) InstructionSet {
+	instructions := GetInstructions(code)
+	return NewInstructionSet(instructions)
+}
+
 // Next returns true if there is a next instruction and moves on.
 func (it *instructionIterator) Next() bool {
 	if it.error != nil || uint64(len(it.code)) <= it.pc {
