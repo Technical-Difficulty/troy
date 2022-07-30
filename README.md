@@ -37,3 +37,7 @@ Ideas of some things we can scan for initially
 - Highlight notable opcodes CALL DELEGATECALL CHAINID
 - Highlight notable function calls "approve", "mint", "transfer"
   - detect if they have a CALLER comparison with EQ and JUMPI
+
+## Preview
+
+![a screenshot of troy](preview/demo.png)
