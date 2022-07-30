@@ -45,7 +45,7 @@ func (t *InstructionTable) init() {
 		Background(t.getColor(colors.Selected.Background)))
 }
 
-func (t *InstructionTable) addColumn(cell *tview.TableCell, selectable bool) {
+func (t *InstructionTable) addRowCell(cell *tview.TableCell, selectable bool) {
 	t.View.SetCell(t.row, 0, cell.SetSelectable(selectable))
 	t.row++
 }
@@ -73,5 +73,5 @@ func (t *InstructionTable) addInstruction(ins dasm.Instruction) {
 		SetAlign(tview.AlignLeft)
 
 	t.instructionPrefix(ins)
-	t.addColumn(cell, true)
+	t.addRowCell(cell, true)
 }
