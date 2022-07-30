@@ -5,19 +5,19 @@ import (
 	"troy/src/eth"
 )
 
-type ContractEnum struct {
-	Contract       eth.Contract
-	FuncSignatures map[uint64][]string // pc => func signatures
+type ContractAnalysis struct {
+	Contract     eth.Contract
+	SignatureMap map[uint64][]string // pc => func signatures
 }
 
-func NewContractEnum(contract eth.Contract) ContractEnum {
-	return ContractEnum{
+func NewContractAnalysis(contract eth.Contract) ContractAnalysis {
+	return ContractAnalysis{
 		Contract: contract,
 	}
 }
 
-func (e *ContractEnum) Enumerate() {
+func (e *ContractAnalysis) Enumerate() {
 	enum := functions.NewFunctionEnum(e.Contract.Instructions)
 
-	e.FuncSignatures = enum.EnumerateSignatures()
+	e.SignatureMap = enum.EnumerateSignatures()
 }

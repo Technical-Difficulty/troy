@@ -8,7 +8,7 @@ import (
 	"troy/src/dasm"
 )
 
-func (t *InstructionTable) getInstructionOutput(ins dasm.Instruction) (output string) {
+func (t *ContractTable) getInstructionOutput(ins dasm.Instruction) (output string) {
 	base := t.getDefaultColorTag()
 	tag := t.getOpcodeTag(ins)
 
@@ -25,19 +25,19 @@ func (t *InstructionTable) getInstructionOutput(ins dasm.Instruction) (output st
 	return t.colorize(output)
 }
 
-func (t *InstructionTable) getProgramCounterOutput(pc uint64) string {
+func (t *ContractTable) getProgramCounterOutput(pc uint64) string {
 	return fmt.Sprintf("%s[%05x]%s",
 		t.config.Colors.Table.ProgramCounter, pc, t.getDefaultColorTag(),
 	)
 }
 
-func (t *InstructionTable) colorize(input string) string {
+func (t *ContractTable) colorize(input string) string {
 	return fmt.Sprintf("%s%s", t.getDefaultColorTag(), input)
 }
 
 // Color tags can be passed as [foreground:background:flags]
 // https://github.com/rivo/tview/blob/master/doc.go#L65
-func (t *InstructionTable) getOpcodeTag(ins dasm.Instruction) string {
+func (t *ContractTable) getOpcodeTag(ins dasm.Instruction) string {
 	opcode := ins.OpCode.String()
 
 	def, ok := t.config.Colors.Instructions["default"]
@@ -58,12 +58,12 @@ func (t *InstructionTable) getOpcodeTag(ins dasm.Instruction) string {
 	return def.Opcode
 }
 
-func (t *InstructionTable) getDefaultColorTag() string {
+func (t *ContractTable) getDefaultColorTag() string {
 	c := t.config.Colors.Table.Default
 	return fmt.Sprintf("[%s:%s:%s]", c.Foreground, c.Background, c.Flags)
 }
 
-func (t *InstructionTable) getColor(key string) (c tcell.Color) {
+func (t *ContractTable) getColor(key string) (c tcell.Color) {
 	if value, ok := tcell.ColorNames[key]; ok {
 		return value
 	}

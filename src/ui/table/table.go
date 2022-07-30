@@ -8,19 +8,19 @@ import (
 	"troy/src/dasm/enum"
 )
 
-type InstructionTable struct {
+type ContractTable struct {
 	View         *tview.Table
 	Instructions dasm.InstructionSet
-	Analysis     enum.ContractEnum
+	Analysis     enum.ContractAnalysis
 	row          int
 	config       src.Config
 }
 
-func NewInstructionTable(enum enum.ContractEnum, config src.Config) InstructionTable {
-	table := InstructionTable{
+func NewContractTable(analysis enum.ContractAnalysis, config src.Config) ContractTable {
+	table := ContractTable{
 		View:         tview.NewTable(),
-		Instructions: enum.Contract.Instructions,
-		Analysis:     enum,
+		Instructions: analysis.Contract.Instructions,
+		Analysis:     analysis,
 		row:          0,
 		config:       config,
 	}
@@ -35,7 +35,7 @@ func NewInstructionTable(enum enum.ContractEnum, config src.Config) InstructionT
 	return table
 }
 
-func (t *InstructionTable) init() {
+func (t *ContractTable) init() {
 	colors := t.config.Colors.Table
 
 	t.View.SetSelectable(true, false)
@@ -45,29 +45,29 @@ func (t *InstructionTable) init() {
 		Background(t.getColor(colors.Selected.Background)))
 }
 
-func (t *InstructionTable) addRowCell(cell *tview.TableCell, selectable bool) {
+func (t *ContractTable) addRowCell(cell *tview.TableCell, selectable bool) {
 	t.View.SetCell(t.row, 0, cell.SetSelectable(selectable))
 	t.row++
 }
 
-func (t *InstructionTable) addRow(text string, selectable bool) {
+func (t *ContractTable) addRow(text string, selectable bool) {
 	cell := tview.NewTableCell(text).SetSelectable(selectable)
 	t.View.SetCell(t.row, 0, cell)
 	t.row++
 }
 
-func (t *InstructionTable) addBoldRow(text string, selectable bool) {
+func (t *ContractTable) addBoldRow(text string, selectable bool) {
 	cell := tview.NewTableCell(text).SetSelectable(selectable).SetStyle(tcell.StyleDefault.Bold(true))
 	t.View.SetCell(t.row, 0, cell)
 	t.row++
 }
 
-func (t *InstructionTable) addEmptyRow(selectable bool) {
+func (t *ContractTable) addEmptyRow(selectable bool) {
 	t.View.SetCell(t.row, 0, tview.NewTableCell("").SetSelectable(selectable))
 	t.row++
 }
 
-func (t *InstructionTable) addInstruction(ins dasm.Instruction) {
+func (t *ContractTable) addInstruction(ins dasm.Instruction) {
 	cell := tview.NewTableCell(t.getInstructionOutput(ins)).
 		SetExpansion(1).
 		SetAlign(tview.AlignLeft)

@@ -13,7 +13,7 @@ func main() {
 	config := src.InitConfig(args)
 	contract := eth.InitInitialContract(args, config)
 
-	enumerator := enum.NewContractEnum(contract)
+	enumerator := enum.NewContractAnalysis(contract)
 	enumerator.Enumerate()
 
 	ui.Start(enumerator, config)
