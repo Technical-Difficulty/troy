@@ -20,7 +20,7 @@ type (
 	}
 
 	InstructionColors struct {
-		Opcode ColorTags
+		Opcode string
 	}
 
 	TableColors struct {
@@ -31,11 +31,6 @@ type (
 		Foreground string
 		Background string
 		Flags      string
-	}
-
-	ColorTags struct {
-		Prefix string
-		Suffix string
 	}
 )
 

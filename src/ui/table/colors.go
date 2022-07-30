@@ -36,15 +36,15 @@ func (t *InstructionTable) getOpcodeTag(ins dasm.Instruction) string {
 
 	if strings.Contains(opcode, "not defined") {
 		if tags, ok := t.config.Colors.Instructions["notdefined"]; ok {
-			return tags.Opcode.Prefix
+			return tags.Opcode
 		}
 	}
 
 	if tags, ok := t.config.Colors.Instructions[opcode]; ok {
-		return tags.Opcode.Prefix
+		return tags.Opcode
 	}
 
-	return def.Opcode.Prefix
+	return def.Opcode
 }
 
 func (t *InstructionTable) getDefaultColorTag() string {
