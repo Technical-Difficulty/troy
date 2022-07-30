@@ -16,7 +16,7 @@ type UI struct {
 
 func Start(enum enum.ContractEnum, config src.Config) UI {
 	app := tview.NewApplication()
-	tbl := table.NewInstructionTable(enum.Contract.Instructions.Array(), config)
+	tbl := table.NewInstructionTable(enum, config)
 
 	flex := createFlex(enum.Contract)
 	flex.AddItem(tbl.View, 0, 1, true)

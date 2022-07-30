@@ -5,19 +5,22 @@ import (
 	"github.com/rivo/tview"
 	"troy/src"
 	"troy/src/dasm"
+	"troy/src/dasm/enum"
 )
 
 type InstructionTable struct {
 	View         *tview.Table
-	Instructions []dasm.Instruction
+	Instructions dasm.InstructionSet
+	Analysis     enum.ContractEnum
 	row          int
 	config       src.Config
 }
 
-func NewInstructionTable(instructions []dasm.Instruction, config src.Config) InstructionTable {
+func NewInstructionTable(enum enum.ContractEnum, config src.Config) InstructionTable {
 	table := InstructionTable{
 		View:         tview.NewTable(),
-		Instructions: instructions,
+		Instructions: enum.Contract.Instructions,
+		Analysis:     enum,
 		row:          0,
 		config:       config,
 	}
@@ -25,7 +28,7 @@ func NewInstructionTable(instructions []dasm.Instruction, config src.Config) Ins
 	// Any special configuration can be performed here
 	table.init()
 
-	for _, ins := range instructions {
+	for _, ins := range table.Instructions.Array() {
 		table.addInstruction(ins)
 	}
 
@@ -44,6 +47,23 @@ func (t *InstructionTable) init() {
 
 func (t *InstructionTable) addColumn(cell *tview.TableCell, selectable bool) {
 	t.View.SetCell(t.row, 0, cell.SetSelectable(selectable))
+	t.row++
+}
+
+func (t *InstructionTable) addRow(text string, selectable bool) {
+	cell := tview.NewTableCell(text).SetSelectable(selectable)
+	t.View.SetCell(t.row, 0, cell)
+	t.row++
+}
+
+func (t *InstructionTable) addBoldRow(text string, selectable bool) {
+	cell := tview.NewTableCell(text).SetSelectable(selectable).SetStyle(tcell.StyleDefault.Bold(true))
+	t.View.SetCell(t.row, 0, cell)
+	t.row++
+}
+
+func (t *InstructionTable) addEmptyRow(selectable bool) {
+	t.View.SetCell(t.row, 0, tview.NewTableCell("").SetSelectable(selectable))
 	t.row++
 }
 
