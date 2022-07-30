@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"fmt"
 	"github.com/rivo/tview"
 	"troy/src"
 	"troy/src/eth"
@@ -18,6 +19,10 @@ func Start(contract eth.Contract, config src.Config) UI {
 
 	flex := createFlex()
 	flex.AddItem(tbl.View, 0, 1, true)
+
+	if !contract.IsMock {
+		flex.SetTitle(fmt.Sprintf("[ %s ]", contract.Address))
+	}
 
 	if err := app.SetRoot(flex, true).EnableMouse(true).Run(); err != nil {
 		panic(err)
