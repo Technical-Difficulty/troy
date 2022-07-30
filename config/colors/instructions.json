@@ -1,0 +1,18 @@
+{
+  "instructions": {
+
+    "default": {
+      "opcode": {
+        "prefix": "[white:black:-]",
+        "suffix": "[white:black:-]"
+      }
+    },
+
+    "JUMPI": {
+      "opcode": {
+        "prefix": "[yellow:black:b]",
+        "suffix": "[white::-]"
+      }
+    }
+  }
+}

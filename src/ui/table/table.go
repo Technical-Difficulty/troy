@@ -2,6 +2,7 @@ package table
 
 import (
 	"github.com/rivo/tview"
+	"troy/src"
 	"troy/src/dasm"
 )
 
@@ -9,13 +10,15 @@ type InstructionTable struct {
 	View         *tview.Table
 	Instructions []dasm.Instruction
 	row          int
+	config       src.Config
 }
 
-func NewInstructionTable(instructions []dasm.Instruction) InstructionTable {
+func NewInstructionTable(instructions []dasm.Instruction, config src.Config) InstructionTable {
 	table := InstructionTable{
 		View:         tview.NewTable(),
 		Instructions: instructions,
 		row:          0,
+		config:       config,
 	}
 
 	// Any special configuration can be performed here

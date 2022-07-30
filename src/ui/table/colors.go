@@ -2,14 +2,8 @@ package table
 
 import (
 	"fmt"
+	"log"
 	"troy/src/dasm"
-)
-
-const (
-	ForegroundDefault = "white"
-	ForegroundJump    = "yellow"
-
-	BackgroundDefault = "black"
 )
 
 func (t *InstructionTable) getInstructionOutput(ins dasm.Instruction) (output string) {
@@ -27,14 +21,14 @@ func (t *InstructionTable) getInstructionOutput(ins dasm.Instruction) (output st
 // Color tags can be passed as [foreground:background:flags]
 // https://github.com/rivo/tview/blob/master/doc.go#L65
 func (t *InstructionTable) getColorValues(ins dasm.Instruction) (prefix string, suffix string) {
-	d := fmt.Sprintf("[%s:%s:-]", ForegroundDefault, BackgroundDefault)
-
-	switch ins.OpCode.String() {
-	case "JUMPI":
-		fallthrough
-	case "JUMPDEST":
-		return fmt.Sprintf("[%s:%s:b]", ForegroundJump, BackgroundDefault), d
+	def, ok := t.config.Colors.Instructions["default"]
+	if !ok {
+		log.Fatal("Failed to find default instruction colors in color config")
 	}
 
-	return d, d
+	if tags, ok := t.config.Colors.Instructions[ins.OpCode.String()]; ok {
+		return tags.Opcode.Prefix, tags.Opcode.Suffix
+	}
+
+	return def.Opcode.Prefix, def.Opcode.Suffix
 }
