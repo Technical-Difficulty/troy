@@ -2,10 +2,11 @@ package src
 
 import (
 	"encoding/hex"
-	log "github.com/sirupsen/logrus"
 	"troy/src/dasm"
 	"troy/src/eth"
 	"troy/src/ui"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func Start() {
@@ -30,5 +31,11 @@ func Start() {
 	}
 
 	instructions := dasm.GetInstructions(code)
+
+	// Returns function signature as enum.FuncSig
+	// fs.String() 0xfdf80bda
+	// fs.Lookup() "transfer(address,uint256)"
+	// enum.FuncSigs(instructions)
+
 	ui.Start(instructions)
 }

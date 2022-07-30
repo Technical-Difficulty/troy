@@ -1,9 +1,10 @@
 package ui
 
 import (
-	"github.com/rivo/tview"
 	"troy/src/dasm"
 	"troy/src/ui/table"
+
+	"github.com/rivo/tview"
 )
 
 type UI struct {
