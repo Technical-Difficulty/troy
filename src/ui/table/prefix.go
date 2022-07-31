@@ -31,9 +31,11 @@ func (t *ContractTable) outputInstructionBlockHeader(ins dasm.Instruction) {
 func (t *ContractTable) outputFunctionSignature(sigs []string) {
 	signature := sigs[0]
 	possibleSignatures := strings.Join(sigs, ", ")
+	c := t.config.Colors.Table.FunctionSignature
+	tag := t.getDefaultColorTag()
 
-	t.addRow("--------------------------------------------------------------", false)
-	t.addRow(fmt.Sprintf("  function %s", signature), false)
-	t.addRow(fmt.Sprintf("  possible signatures: [%s]", possibleSignatures), false)
-	t.addRow("--------------------------------------------------------------", false)
+	t.addRow(fmt.Sprintf("%s--------------------------------------------------------------%s", c.Divider, tag), false)
+	t.addRow(fmt.Sprintf("%s  function %s%s", c.Function, signature, tag), false)
+	t.addRow(fmt.Sprintf("%s  possible signatures: [%s]%s", c.PossibleSignatures, possibleSignatures, tag), false)
+	t.addRow(fmt.Sprintf("%s--------------------------------------------------------------%s", c.Divider, tag), false)
 }

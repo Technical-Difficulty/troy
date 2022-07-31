@@ -9,6 +9,11 @@
       "foreground": "white",
       "background": "darkcyan"
     },
-    "program_counter": "[grey::b]"
+    "program_counter": "[grey::b]",
+    "function_signatures": {
+      "divider": "[white::]",
+      "function": "[white::b]",
+      "possible_signatures": "[darkgray::]"
+    }
   }
 }

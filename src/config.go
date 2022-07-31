@@ -24,9 +24,16 @@ type (
 	}
 
 	TableColors struct {
-		Default        ColorFlag
-		Selected       ColorFlag
-		ProgramCounter string `json:"program_counter"`
+		Default           ColorFlag
+		Selected          ColorFlag
+		ProgramCounter    string                  `json:"program_counter"`
+		FunctionSignature FunctionSignatureColors `json:"function_signatures"`
+	}
+
+	FunctionSignatureColors struct {
+		Divider            string
+		Function           string
+		PossibleSignatures string `json:"possible_signatures"`
 	}
 
 	ColorFlag struct {
