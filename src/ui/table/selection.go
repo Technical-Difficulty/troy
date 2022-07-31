@@ -10,7 +10,12 @@ type SelectionChange struct {
 	PreviousText string
 }
 
-func (t *ContractTable) handleSelectionChanged(row int, _ int) {
+func (t *ContractTable) handleSelectionChanged(row int, column int) {
+	// Don't process a row that is marked as not selectable
+	if t.View.GetCell(row, column).NotSelectable {
+		return
+	}
+
 	// Restore any previously made changes
 	t.restoreChanges()
 

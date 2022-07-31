@@ -1,8 +1,15 @@
 package table
 
-import "troy/src/dasm"
+import (
+	"troy/src/dasm"
+)
 
 func (t *ContractTable) handleSetSelected(row int, column int) {
+	// Don't process a row that is marked as not selectable
+	if t.View.GetCell(row, column).NotSelectable {
+		return
+	}
+
 	ins := t.InstructionMap.GetInstruction(row)
 
 	switch ins.OpCode.String() {
