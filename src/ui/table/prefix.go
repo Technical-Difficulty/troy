@@ -7,6 +7,10 @@ import (
 )
 
 func (t *ContractTable) instructionPrefix(ins dasm.Instruction) {
+	if ins.PC == 0 {
+		t.outputInstructionBlockHeader(ins)
+	}
+
 	switch ins.OpCode.String() {
 	case "JUMPDEST":
 		t.outputInstructionBlockHeader(ins)
