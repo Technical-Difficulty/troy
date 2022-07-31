@@ -27,10 +27,18 @@ func (t *ContractTable) outputInstructionBlockHeader(ins dasm.Instruction) {
 	}
 }
 
-// todo: If we detect a function but don't detect the signature, inform the user
 func (t *ContractTable) outputFunctionSignature(sigs []string) {
-	signature := sigs[0]
-	possibleSignatures := strings.Join(sigs, ", ")
+	var signature string
+	var possibleSignatures string
+
+	if sigs == nil {
+		signature = ""
+		possibleSignatures = "none found"
+	} else {
+		signature = sigs[0]
+		possibleSignatures = strings.Join(sigs, ", ")
+	}
+
 	c := t.config.Colors.Table.FunctionSignature
 	tag := t.getDefaultColorTag()
 
