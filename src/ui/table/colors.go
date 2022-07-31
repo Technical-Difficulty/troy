@@ -63,6 +63,14 @@ func (t *ContractTable) getDefaultColorTag() string {
 	return fmt.Sprintf("[%s:%s:%s]", c.Foreground, c.Background, c.Flags)
 }
 
+func (t *ContractTable) getDefaultSelectedStyle() tcell.Style {
+	colors := t.config.Colors.Table.Selected
+
+	return tcell.StyleDefault.
+		Foreground(t.getColor(colors.Foreground)).
+		Background(t.getColor(colors.Background))
+}
+
 func (t *ContractTable) getColor(key string) (c tcell.Color) {
 	if value, ok := tcell.ColorNames[key]; ok {
 		return value

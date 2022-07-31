@@ -9,20 +9,23 @@ import (
 )
 
 type ContractTable struct {
-	View         *tview.Table
-	Instructions dasm.InstructionSet
-	Analysis     enum.ContractAnalysis
-	row          int
-	config       src.Config
+	View           *tview.Table
+	Instructions   dasm.InstructionSet
+	InstructionMap dasm.InstructionMap
+	Analysis       enum.ContractAnalysis
+	row            int
+	config         src.Config
+	changes        []SelectionChange
 }
 
 func NewContractTable(analysis enum.ContractAnalysis, config src.Config) ContractTable {
 	table := ContractTable{
-		View:         tview.NewTable(),
-		Instructions: analysis.Contract.Instructions,
-		Analysis:     analysis,
-		row:          0,
-		config:       config,
+		View:           tview.NewTable(),
+		Instructions:   analysis.Contract.Instructions,
+		InstructionMap: dasm.NewInstructionMap(),
+		Analysis:       analysis,
+		row:            0,
+		config:         config,
 	}
 
 	// Any special configuration can be performed here
@@ -43,6 +46,9 @@ func (t *ContractTable) init() {
 	t.View.SetSelectedStyle(tcell.StyleDefault.
 		Foreground(t.getColor(colors.Selected.Foreground)).
 		Background(t.getColor(colors.Selected.Background)))
+
+	t.View.SetSelectionChangedFunc(t.handleSelectionChanged)
+	t.View.SetSelectedFunc(t.handleSetSelected)
 }
 
 func (t *ContractTable) addRowCell(cell *tview.TableCell, selectable bool) {
@@ -74,4 +80,7 @@ func (t *ContractTable) addInstruction(ins dasm.Instruction) {
 
 	t.instructionPrefix(ins)
 	t.addRowCell(cell, true)
+
+	// -1 because addRowCell increments by 1 before returning
+	t.InstructionMap.Add(t.row-1, ins)
 }
